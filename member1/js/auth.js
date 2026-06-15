@@ -65,9 +65,13 @@ registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   showMessage("Creating your account…", null);
 
-  const name = document.getElementById("register-name").value.trim();
-  const email = document.getElementById("register-email").value.trim();
+  const name     = document.getElementById("register-name").value.trim();
+  const email    = document.getElementById("register-email").value.trim();
   const password = document.getElementById("register-password").value;
+
+  // ── NEW: read the selected role from the role cards ──────
+  const role = document.querySelector('input[name="role"]:checked')?.value ?? "student";
+  // ─────────────────────────────────────────────────────────
 
   const { data, error } = await sb.auth.signUp({
     email,
@@ -88,8 +92,22 @@ registerForm.addEventListener("submit", async (e) => {
     return;
   }
 
+  // ── NEW: save the chosen role to the profiles table ──────
+  // The handle_new_user trigger already created the profiles row.
+  // This upsert simply adds the role to it.
+  if (data.user) {
+    const { error: profileError } = await sb
+      .from("profiles")
+      .upsert({ id: data.user.id, full_name: name, role: role });
+
+    if (profileError) {
+      console.error("Could not save role:", profileError.message);
+    }
+  }
+  // ─────────────────────────────────────────────────────────
+
   // Email confirmation disabled (recommended for this prototype):
   // the on_auth_user_created trigger has already created the
   // profiles row, so send the learner straight to track selection.
-  routeForProfile({ onboarding_complete: false, track_id: null });
+  routeForProfile({ onboarding_complete: false, track_id: null, role: role });
 });
