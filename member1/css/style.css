@@ -766,3 +766,71 @@ p {
     padding: 22px;
   }
 }
+/* ============================================================
+   ROLE SELECTOR — append this to the bottom of css/style.css
+   ============================================================ */
+
+.role-selector {
+  margin: 1rem 0;
+}
+
+.role-selector__label {
+  font-size: 0.78rem;
+  color: #a0a0b8;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.role-selector__options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1rem 0.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.role-card:hover {
+  border-color: rgba(160, 100, 255, 0.5);
+  background: rgba(160, 100, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Highlighted when its radio is checked */
+.role-card:has(input[type="radio"]:checked) {
+  border-color: #a064ff;
+  background: rgba(160, 100, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(160, 100, 255, 0.25);
+}
+
+.role-card__icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.role-card__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.role-card__desc {
+  font-size: 0.72rem;
+  color: #a0a0b8;
+  text-align: center;
+  line-height: 1.35;
+}
