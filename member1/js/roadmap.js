@@ -226,6 +226,20 @@ async function init() {
 
   trackPill.textContent = `${profile.tracks?.name ?? "Track"} · ${profile.mentors?.name ?? "Mentor"}`;
 
+  if (profile.mentors) {
+    document.getElementById("mentor-widget").hidden = false;
+    document.getElementById("mentor-widget-name").textContent = profile.mentors.name;
+    document.getElementById("mentor-widget-specialty").textContent = profile.mentors.specialty;
+    
+    // Create initials for avatar (first letter of first and last word if any)
+    const nameParts = profile.mentors.name.split(" ");
+    let initials = nameParts[0][0];
+    if (nameParts.length > 1) {
+      initials += nameParts[nameParts.length - 1][0];
+    }
+    document.getElementById("mentor-widget-avatar").textContent = initials.toUpperCase();
+  }
+
   await loadRoadmap();
 }
 
