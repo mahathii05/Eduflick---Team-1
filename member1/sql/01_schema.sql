@@ -94,3 +94,7 @@ create table if not exists lesson_progress (
   completed_at timestamptz,
   unique (user_id, lesson_id)
 );
+-- Add role column to profiles table
+ALTER TABLE profiles
+  ADD COLUMN IF NOT EXISTS role text NOT NULL DEFAULT 'student'
+  CHECK (role IN ('student', 'mentor'));
