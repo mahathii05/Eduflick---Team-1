@@ -76,6 +76,27 @@
             <label for="register-password">Password</label>
             <input type="password" id="register-password" required minlength="6" autocomplete="new-password" />
           </div>
+
+          <!-- ROLE SELECTOR (NEW) -->
+          <div class="role-selector">
+            <p class="role-selector__label">I am joining as a...</p>
+            <div class="role-selector__options">
+              <label class="role-card" id="role-card-student">
+                <input type="radio" name="role" value="student" id="role-student" checked hidden />
+                <div class="role-card__icon">&#127891;</div>
+                <div class="role-card__title">Student</div>
+                <div class="role-card__desc">Learn with AI-guided roadmaps</div>
+              </label>
+              <label class="role-card" id="role-card-mentor">
+                <input type="radio" name="role" value="mentor" id="role-mentor" hidden />
+                <div class="role-card__icon">&#128104;&#8205;&#127979;</div>
+                <div class="role-card__title">Mentor</div>
+                <div class="role-card__desc">Guide and support learners</div>
+              </label>
+            </div>
+          </div>
+          <!-- END ROLE SELECTOR -->
+
           <button type="submit" class="btn btn--primary btn--block">Create account</button>
         </form>
 
